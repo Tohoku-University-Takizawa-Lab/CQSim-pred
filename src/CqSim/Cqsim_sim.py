@@ -361,7 +361,7 @@ class Cqsim_sim:
         while (i < max_num):
             temp_job = self.module['job'].job_info(temp_wait[i])
             temp_wait_info.append({"index":temp_wait[i],"proc":temp_job['reqProc'],\
-             "node":temp_job['reqProc'],"run":temp_job['run'],"score":temp_job['score']})
+             "node":temp_job['reqProc'],"run":temp_job['run'],"score":temp_job['score'], "predictTime":temp_job['predictTime']})
             i += 1
         backfill_list = self.module['backfill'].backfill(temp_wait_info, {'time':self.currentTime})
         #self.debug.debug("HHHHHHHHHHHHH "+str(backfill_list)+" -- backfill",2) 

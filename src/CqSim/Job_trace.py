@@ -107,6 +107,7 @@ class Job_trace:
                             'num_part':int(temp_dataList[15]),\
                             'num_pre':int(temp_dataList[16]),\
                             'thinkTime':int(temp_dataList[17]),\
+                            'predictTime':float(temp_dataList[18]),\
                             'start':-1,\
                             'end':-1,\
                             'score':0,\
@@ -121,7 +122,7 @@ class Job_trace:
                 self.i += 1      
             self.j += 1
             temp_n += 1
-           return 0
+            return 0
     
     def import_job_file (self, job_file):
         #self.debug.debug("* "+self.myInfo+" -- import_job_file",5)
@@ -166,6 +167,7 @@ class Job_trace:
                             'num_part':int(temp_dataList[15]),\
                             'num_pre':int(temp_dataList[16]),\
                             'thinkTime':int(temp_dataList[17]),\
+                            'predictTime':float(temp_dataList[18]),\
                             'start':-1,\
                             'end':-1,\
                             'score':0,\
