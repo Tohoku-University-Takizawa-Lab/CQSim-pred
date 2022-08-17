@@ -69,7 +69,7 @@ class Backfill:
         i = 1
         job_num = len(self.wait_job)
         while (i < job_num):
-            self.debug.debug("#############predictTime: " + str(self.wait_job[i]['predictTime']), 3)
+            # self.debug.debug("#############predictTime: " + str(self.wait_job[i]['predictTime']), 3)
             backfill_test = 0
             backfill_test = self.node_module.pre_avail(self.wait_job[i]['proc'],\
                     self.current_para['time'], self.current_para['time']+self.wait_job[i]['predictTime'])
