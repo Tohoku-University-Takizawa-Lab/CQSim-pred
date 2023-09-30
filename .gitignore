@@ -2,3 +2,5 @@ data/Results/*
 data/Fmt/*
 data/Debug/*
 *.pyc
+*.swf
+*.log
