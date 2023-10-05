@@ -5,8 +5,8 @@ def main():
     args = sys.argv
     fileName = args[1]
     #newFileName = "".join(fileName.split(".")[:-1]) + "_regulate.swf"
-    fin = open(args[1], 'r')
-    fout = open(args[2], 'a')
+    fin = open("../data/InputFiles/" + args[1], 'r')
+    fout = open("../data/InputFiles/" + args[2], 'w')
     lines = fin.readlines()
     fin.close()
     ls = ""

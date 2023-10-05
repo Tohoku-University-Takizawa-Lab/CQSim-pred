@@ -24,14 +24,14 @@ sum = 0.0
 for i in range(len(log)):
     sum +=log[i][5]
 
-print("wait time: ", sum/len(log))
+print("average wait time   : ", sum/len(log))
 
-# calculate average slowdown
-slowdown = 0.0
-for i in range(len(log)):
-    slowdown += (log[i][5] + log[i][4]) / log[i][4]
+# calculate bounded slowdown
+b_slowdown = 0.0
+for i in range (len(log)):
+    b_slowdown += max(((log[i][5] + log[i][4]) / max(log[i][4], 10)), 1)
 
-print("slow down: ", slowdown/len(log))
+print("average slow down(b): ", b_slowdown/len(log))
 
 # read in log file
 with open("../data/InputFiles/" + sys.argv[1] + '.swf', 'r') as file:
@@ -42,7 +42,11 @@ with open("../data/InputFiles/" + sys.argv[1] + '.swf', 'r') as file:
 
 # calculate success percentage
 success = 0.0
+successLen = len(log)
 for i in range(len(log)):
-    if (float(log[i][18]) >= float(log[i][3])):
-        success += 1
-print("success  : ", '{:.2%}'.format(success / len(log)))
+    if (log[i][3] != -1):
+        if (float(log[i][18]) >= float(log[i][3])):
+            success += 1
+    else:
+        successLen -= 1
+print("success  : ", '{:.2%}'.format(success / successLen))
