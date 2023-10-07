@@ -1,19 +1,23 @@
-# pred-CQSim - predicted runtime based job scheduling simulator
+# CQSim-pred - a predicted runtime based job scheduling simulator
 
-pred-CQsim is modified job scheduling simulator based on [CQSim](https://github.com/SPEAR-UIC/CQSim). 
+## CQSim
+CQSim-pred is developed based on [CQSim](https://github.com/SPEAR-UIC/CQSim). 
 
-#### modules
-The added features to the original simulator is as follows: 
-- combine_predicted.py
-  - add the predicted runtime to the log data as an extra column in the data file.
-- Filter_job_SWF.py, Job_trace.py, Cqsim_sim.py
-  - transfer newly added `predicted_runtime` to scheduler.
-- Backfill.py
-  - schedule jobs using predicted runtime.
-- evaluate.py
-  - evaluate the scheduling results.
+## Features
+Except for the original features of [CQSim](https://github.com/SPEAR-UIC/CQSim), CQSim-pred can use a predicted runtime to backfill the jobs submitted to it. After that, it can evaluate the scheduling results. 
 
-# Getting started: Run A Simple Example
+## Modules
+The added and modified modules to the original [CQSim](https://github.com/SPEAR-UIC/CQSim) simulator is as follows: 
+- Combine_predicted.py (Newly Designed)
+  - Add the predicted runtime to the log as an extra column in the `.swf` file.
+- Filter_job_SWF.py, Job_trace.py, Cqsim_sim.py (Modified)
+  - Transfer the added predicted runtime to scheduler.
+- Backfill.py (Modified)
+  - Schedule jobs use the predicted runtime.
+- Evaluate.py (Newly Designed)
+  - Evaluate the scheduling results.
+
+## Usage
 ```
 ./schedule_evaluate.sh $log$ $predicted_runtime$ 
 ```
