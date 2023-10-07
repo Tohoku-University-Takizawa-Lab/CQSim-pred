@@ -8,6 +8,7 @@ class Cqsim_sim:
         self.module = module
         self.debug = debug
         self.monitor = monitor
+        self.bf_counter = 0
         
         self.debug.line(4," ")
         self.debug.line(4,"#")
@@ -63,6 +64,8 @@ class Cqsim_sim:
         self.insert_event_extend()
         self.scan_event()
         self.print_result()
+        self.debug.debug("[tried: ]  "+str(self.module['backfill'].backfill_attempt),3)
+        self.debug.debug("[backfill job number]  "+str(self.bf_counter),3)
         self.debug.debug("------ Simulating Done!",2) 
         self.debug.debug(lvl=1) 
         return
@@ -371,6 +374,7 @@ class Cqsim_sim:
         
         for job in backfill_list:
             self.start(job)
+            self.bf_counter += 1
         return 1
     
     def sys_collect(self):

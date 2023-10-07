@@ -65,16 +65,17 @@ class Backfill:
         self.debug.line(4,'.')
         '''
             
-        self.node_module.reserve(self.wait_job[0]['proc'], self.wait_job[0]['index'], self.wait_job[0]['predictTime'])
+        self.node_module.reserve(self.wait_job[0]['proc'], self.wait_job[0]['index'], self.wait_job[0]['reqTime'])
         i = 1
         job_num = len(self.wait_job)
         while (i < job_num):
-            # self.debug.debug("#############predictTime: " + str(self.wait_job[i]['predictTime']), 3)
+            # self.debug.debug("##### EASY ##### predictTime: " + str(self.wait_job[i]['predictTime']), 3)
             backfill_test = 0
             backfill_test = self.node_module.pre_avail(self.wait_job[i]['proc'],\
                     self.current_para['time'], self.current_para['time']+self.wait_job[i]['predictTime'])
             if (backfill_test == 1):
-                backfill_list.append(self.wait_job[i]['index'])
+                if(self.wait_job[i]['predictTime'] >= self.wait_job[i]['run']):
+                    backfill_list.append(self.wait_job[i]['index'])
                 self.node_module.reserve(self.wait_job[i]['proc'], self.wait_job[i]['index'], self.wait_job[i]['predictTime'])
             i += 1
         return backfill_list
@@ -83,16 +84,19 @@ class Backfill:
         #self.debug.debug("* "+self.myInfo+" -- backfill_cons",5)
         backfill_list=[]
         self.node_module.pre_reset(self.current_para['time'])
-        self.node_module.reserve(self.wait_job[0]['proc'], self.wait_job[0]['index'], self.wait_job[0]['run'])
+        self.node_module.reserve(self.wait_job[0]['proc'], self.wait_job[0]['index'], self.wait_job[0]['reqTime'])
         i = 1
         job_num = len(self.wait_job)
         while (i < job_num):
+            # self.debug.debug("##### conservative ######## predictTime: " + str(self.wait_job[i]['predictTime']), 3)
             backfill_test = 0
             backfill_test = self.node_module.pre_avail(self.wait_job[i]['proc'],\
-                    self.current_para['time'], self.current_para['time']+self.wait_job[i]['run'])
+                    self.current_para['time'], self.current_para['time']+self.wait_job[i]['predictTime'])
             if (backfill_test == 1):
-                backfill_list.append(self.wait_job[i]['index'])
-            self.node_module.reserve(self.wait_job[i]['proc'], self.wait_job[i]['index'], self.wait_job[i]['run'])
+                if(self.wait_job[i]['predictTime'] >= self.wait_job[i]['run']):
+                    backfill_list.append(self.wait_job[i]['index'])
+                self.node_module.reserve(self.wait_job[i]['proc'], self.wait_job[i]['index'], self.wait_job[i]['predictTime'])
+            self.node_module.reserve(self.wait_job[i]['proc'], self.wait_job[i]['index'], self.wait_job[i]['reqTime'])
             i += 1  
         return backfill_list
     
