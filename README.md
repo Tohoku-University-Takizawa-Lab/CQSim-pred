@@ -9,9 +9,10 @@ Except for the original features of [CQSim](https://github.com/SPEAR-UIC/CQSim),
 ## Modules
 The added and modified modules to the original [CQSim](https://github.com/SPEAR-UIC/CQSim) simulator is as follows: 
 - Combine_predicted.py (Newly Designed)
-  - Add the predicted runtime to the log as an extra column in the `.swf` file.
+  - Add the predicted runtime to the log file as a new column.
 - Filter_job_SWF.py, Job_trace.py, Cqsim_sim.py (Modified)
-  - Transfer the added predicted runtime to scheduler.
+  - Transfer the added predicted runtime to the scheduler.
+  - Count the number of job that are scheduled successfully using backfilling.
 - Backfill.py (Modified)
   - Schedule jobs use the predicted runtime.
 - Evaluate.py (Newly Designed)
