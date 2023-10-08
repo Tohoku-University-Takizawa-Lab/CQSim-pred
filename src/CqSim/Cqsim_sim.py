@@ -64,7 +64,6 @@ class Cqsim_sim:
         self.insert_event_extend()
         self.scan_event()
         self.print_result()
-        self.debug.debug("[tried: ]  "+str(self.module['backfill'].backfill_attempt),3)
         self.debug.debug("[backfill job number]  "+str(self.bf_counter),3)
         self.debug.debug("------ Simulating Done!",2) 
         self.debug.debug(lvl=1) 
