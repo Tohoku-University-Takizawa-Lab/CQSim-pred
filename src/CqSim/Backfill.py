@@ -11,6 +11,7 @@ class Backfill:
         self.para_list = para_list
         self.current_para = []
         self.wait_job = []
+        self.punished_job = []
 
         self.debug.line(4," ")
         self.debug.line(4,"#")
@@ -76,7 +77,11 @@ class Backfill:
             if (backfill_test == 1):
                 if(self.wait_job[i]['predictTime'] >= self.wait_job[i]['run']):
                     backfill_list.append(self.wait_job[i]['index'])
-                self.node_module.reserve(self.wait_job[i]['proc'], self.wait_job[i]['index'], self.wait_job[i]['predictTime'])
+                    self.node_module.reserve(self.wait_job[i]['proc'], self.wait_job[i]['index'], self.wait_job[i]['predictTime'])
+                else:
+                    if not (self.wait_job[i]['index'] in self.punished_job):
+                        self.punished_job.append(self.wait_job[i]['index'])
+                        self.node_module.reserve(self.wait_job[i]['proc'], self.wait_job[i]['index'], self.wait_job[i]['predictTime'])
             i += 1
         return backfill_list
         
@@ -95,7 +100,11 @@ class Backfill:
             if (backfill_test == 1):
                 if(self.wait_job[i]['predictTime'] >= self.wait_job[i]['run']):
                     backfill_list.append(self.wait_job[i]['index'])
-                self.node_module.reserve(self.wait_job[i]['proc'], self.wait_job[i]['index'], self.wait_job[i]['predictTime'])
+                    self.node_module.reserve(self.wait_job[i]['proc'], self.wait_job[i]['index'], self.wait_job[i]['predictTime'])
+                else:
+                    if not (self.wait_job[i]['index'] in self.punished_job):
+                        self.punished_job.append(self.wait_job[i]['index'])
+                        self.node_module.reserve(self.wait_job[i]['proc'], self.wait_job[i]['index'], self.wait_job[i]['predictTime'])
             self.node_module.reserve(self.wait_job[i]['proc'], self.wait_job[i]['index'], self.wait_job[i]['reqTime'])
             i += 1  
         return backfill_list
