@@ -33,6 +33,9 @@ for i in range (len(log)):
 
 print("average slow down(b): ", b_slowdown/len(log))
 
+# get finish time
+print("all job finish time : ", log[len(log) - 1][7])
+
 # read in log file
 with open("../data/InputFiles/" + sys.argv[1] + '.swf', 'r') as file:
     log = []
